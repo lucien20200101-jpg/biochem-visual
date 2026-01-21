@@ -25,17 +25,18 @@ jobs:
         with:
           node-version: 20
           cache: npm
-      - name: Install dependencies
+          - name: Install dependencies
         working-directory: .
         env:
-          npm_config_production: "false"
+        npm_config_production: "false"
+        npm_config_bin_links: "true"
         run: |
-          npm ci --include=dev
-          test -d node_modules
-          ls -la node_modules/.bin | head -n 50
+        npm config get bin-links
+        npm ci --include=dev
+        ls -la node_modules/.bin | head -n 50
       - name: Verify Vite installation
         working-directory: .
-        run: ./node_modules/.bin/vite --version
+        run: node node_modules/vite/bin/vite.js --version
       - name: Build
         working-directory: .
         run: npm run build
