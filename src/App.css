@@ -105,6 +105,205 @@
   padding-left: 1.25rem;
 }
 
+.map-page {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.map-page-header h2 {
+  margin: 0 0 0.35rem;
+  font-family: var(--theme-font);
+}
+
+.map-page-header p {
+  margin: 0;
+  color: color-mix(in srgb, var(--theme-text), transparent 35%);
+}
+
+.map-page-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: minmax(0, 1.4fr) minmax(240px, 0.6fr);
+  align-items: start;
+}
+
+.svg-map-shell {
+  display: grid;
+  gap: 1rem;
+  padding: 1.5rem;
+  border-radius: 1.25rem;
+  background: var(--theme-card);
+  border: 1px solid var(--theme-border);
+  box-shadow: var(--theme-shadow);
+}
+
+.svg-map-header {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.svg-map-eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 0.7rem;
+  margin: 0 0 0.35rem;
+  color: color-mix(in srgb, var(--theme-text), transparent 40%);
+}
+
+.svg-map-header h3 {
+  margin: 0 0 0.5rem;
+  font-family: var(--theme-font);
+}
+
+.svg-map-header p {
+  margin: 0;
+  max-width: 420px;
+  color: color-mix(in srgb, var(--theme-text), transparent 35%);
+}
+
+.svg-map-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: color-mix(in srgb, var(--theme-text), transparent 35%);
+}
+
+.svg-map-controls button {
+  border-radius: 999px;
+  border: 1px solid var(--theme-border);
+  background: color-mix(in srgb, var(--theme-card), transparent 10%);
+  padding: 0.4rem 0.9rem;
+  font: inherit;
+  cursor: pointer;
+  color: inherit;
+}
+
+.svg-map-stage {
+  border-radius: 1rem;
+  border: 1px solid var(--theme-border);
+  background: #fff;
+  min-height: 520px;
+  overflow: hidden;
+  cursor: grab;
+}
+
+.svg-map-stage.is-panning {
+  cursor: grabbing;
+}
+
+.map-node {
+  cursor: pointer;
+}
+
+.map-node circle {
+  fill: rgba(255, 255, 255, 0.75);
+  stroke: color-mix(in srgb, var(--theme-text), transparent 40%);
+  stroke-width: 1.5;
+  transition: stroke 0.2s ease, filter 0.2s ease;
+}
+
+.map-node.is-key circle {
+  stroke: var(--theme-accent);
+}
+
+.map-node.is-hovered circle {
+  stroke: var(--theme-primary);
+  filter: drop-shadow(0 0 8px rgba(154, 107, 71, 0.45));
+}
+
+.map-node-core {
+  fill: var(--theme-primary);
+}
+
+.map-node.is-key .map-node-core {
+  fill: var(--theme-accent);
+}
+
+.map-tooltip rect {
+  fill: #fff;
+  stroke: var(--theme-border);
+  filter: drop-shadow(0 8px 14px rgba(72, 52, 36, 0.18));
+}
+
+.map-tooltip text {
+  font-family: var(--theme-font);
+  fill: var(--theme-text);
+}
+
+.map-tooltip-title {
+  font-weight: 600;
+}
+
+.map-tooltip-body {
+  fill: color-mix(in srgb, var(--theme-text), transparent 30%);
+  font-size: 0.75rem;
+}
+
+.map-info-panel {
+  display: grid;
+  gap: 1rem;
+}
+
+.map-info-card {
+  padding: 1.5rem;
+  border-radius: 1.2rem;
+  border: 1px solid var(--theme-border);
+  background: var(--theme-card);
+  box-shadow: var(--theme-shadow);
+  display: grid;
+  gap: 1rem;
+}
+
+.map-info-card.is-muted {
+  color: color-mix(in srgb, var(--theme-text), transparent 35%);
+}
+
+.map-info-label {
+  margin: 0;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+}
+
+.map-info-summary {
+  margin: 0;
+}
+
+.map-info-meta {
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+}
+
+.map-info-title {
+  display: block;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: color-mix(in srgb, var(--theme-text), transparent 40%);
+  margin-bottom: 0.35rem;
+}
+
+.map-info-list ul {
+  margin: 0;
+  padding-left: 1.1rem;
+}
+
+.map-info-action {
+  border-radius: 999px;
+  border: 1px solid var(--theme-primary);
+  background: var(--theme-primary);
+  color: var(--theme-bg);
+  padding: 0.6rem 1.1rem;
+  font: inherit;
+  cursor: pointer;
+  width: fit-content;
+}
+
 .app-footer {
   display: flex;
   justify-content: space-between;
@@ -128,5 +327,16 @@
   .app-footer {
     flex-direction: column;
     gap: 0.5rem;
+  }
+}
+
+@media (max-width: 960px) {
+  .map-page-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .svg-map-header {
+    flex-direction: column;
+    align-items: flex-start;
   }
 }
