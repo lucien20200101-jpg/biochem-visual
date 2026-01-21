@@ -29,8 +29,11 @@ jobs:
         run: |
           pwd
           ls -la
+          node -v && npm -v
           npm ci
-          ls -la node_modules/.bin | head
+          ls -la node_modules/.bin | head -n 20
+      - name: Verify Vite installation
+        run: ./node_modules/.bin/vite --version
       - name: Build
         run: npm run build
       - name: Upload Pages artifact
