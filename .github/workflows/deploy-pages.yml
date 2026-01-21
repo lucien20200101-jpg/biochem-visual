@@ -36,8 +36,7 @@ jobs:
 
       - name: Verify Vite installation
         working-directory: .
-        run: |
-          npx vite --version
+        run: node node_modules/vite/bin/vite.js --version
 
       - name: Build
         working-directory: .
