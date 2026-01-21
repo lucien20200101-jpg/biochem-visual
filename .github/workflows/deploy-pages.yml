@@ -26,15 +26,16 @@ jobs:
           node-version: 20
           cache: npm
       - name: Install dependencies
+        working-directory: .
         run: |
-          pwd
-          ls -la
-          node -v && npm -v
           npm ci
+          test -d node_modules
           ls -la node_modules/.bin | head -n 50
       - name: Verify Vite installation
+        working-directory: .
         run: ./node_modules/.bin/vite --version
       - name: Build
+        working-directory: .
         run: npm run build
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
