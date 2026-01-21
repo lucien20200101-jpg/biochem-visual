@@ -4,6 +4,8 @@
   flex-direction: column;
   gap: 2rem;
   padding: 2.5rem 3rem 3rem;
+  background: var(--theme-bg);
+  color: var(--theme-text);
 }
 
 .app-header {
@@ -18,14 +20,42 @@
   text-transform: uppercase;
   letter-spacing: 0.2em;
   font-size: 0.75rem;
-  color: #9ca3af;
+  color: color-mix(in srgb, var(--theme-text), transparent 35%);
   margin: 0 0 0.5rem;
 }
 
 .app-subtitle {
   max-width: 540px;
-  color: #d1d5db;
+  color: color-mix(in srgb, var(--theme-text), transparent 30%);
   margin: 0.5rem 0 0;
+}
+
+.theme-switcher {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  padding: 0.6rem 0.9rem;
+  border-radius: 999px;
+  background: var(--theme-card);
+  border: 1px solid var(--theme-border);
+  box-shadow: var(--theme-shadow);
+  width: fit-content;
+  margin-left: auto;
+  font-size: 0.9rem;
+}
+
+.theme-switcher label {
+  font-weight: 600;
+}
+
+.theme-switcher select {
+  border-radius: 999px;
+  border: 1px solid var(--theme-border);
+  background: color-mix(in srgb, var(--theme-card), transparent 15%);
+  color: var(--theme-text);
+  padding: 0.35rem 0.75rem;
+  font: inherit;
 }
 
 .app-nav {
@@ -38,14 +68,16 @@
 .app-nav a {
   padding: 0.5rem 0.9rem;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.08);
+  background: color-mix(in srgb, var(--theme-card), transparent 25%);
+  border: 1px solid transparent;
   color: inherit;
 }
 
 .app-nav a.active {
-  background: #38bdf8;
-  color: #0f172a;
+  background: var(--theme-primary);
+  color: var(--theme-bg);
   font-weight: 600;
+  border-color: color-mix(in srgb, var(--theme-primary), transparent 20%);
 }
 
 .app-main {
@@ -57,13 +89,15 @@
 .content-panel {
   padding: 1.75rem;
   border-radius: 1.25rem;
-  background: rgba(15, 23, 42, 0.7);
-  border: 1px solid rgba(148, 163, 184, 0.2);
-  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.35);
+  background: var(--theme-card);
+  border: 1px solid var(--theme-border);
+  box-shadow: var(--theme-shadow);
+  backdrop-filter: blur(18px);
 }
 
 .content-panel h2 {
   margin-top: 0;
+  font-family: var(--theme-font);
 }
 
 .content-panel ul {
@@ -74,15 +108,21 @@
 .app-footer {
   display: flex;
   justify-content: space-between;
-  color: #9ca3af;
+  color: color-mix(in srgb, var(--theme-text), transparent 40%);
   font-size: 0.9rem;
-  border-top: 1px solid rgba(148, 163, 184, 0.2);
+  border-top: 1px solid var(--theme-border);
   padding-top: 1.5rem;
 }
 
 @media (max-width: 640px) {
   .app-shell {
     padding: 2rem 1.5rem 2.5rem;
+  }
+
+  .theme-switcher {
+    width: 100%;
+    justify-content: space-between;
+    margin-left: 0;
   }
 
   .app-footer {
