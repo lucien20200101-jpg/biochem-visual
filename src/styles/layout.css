@@ -1,0 +1,49 @@
+.app-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  background-color: #ffffff;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.brand {
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.nav {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.nav-link {
+  padding: 0.35rem 0.6rem;
+  border-radius: 6px;
+  color: #1f2933;
+}
+
+.nav-link-active {
+  background-color: #e2e8f0;
+  font-weight: 600;
+}
+
+.app-main {
+  flex: 1;
+  padding: 2rem;
+}
+
+.app-footer {
+  padding: 1rem 2rem;
+  background-color: #ffffff;
+  border-top: 1px solid #e2e8f0;
+  font-size: 0.9rem;
+  color: #52606d;
+}
