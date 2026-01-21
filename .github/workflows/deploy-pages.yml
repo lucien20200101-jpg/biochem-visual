@@ -27,8 +27,10 @@ jobs:
           cache: npm
       - name: Install dependencies
         working-directory: .
+        env:
+          npm_config_production: "false"
         run: |
-          npm ci
+          npm ci --include=dev
           test -d node_modules
           ls -la node_modules/.bin | head -n 50
       - name: Verify Vite installation
