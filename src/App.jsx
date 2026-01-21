@@ -1,5 +1,6 @@
 import { NavLink, Route, Routes, useLocation } from "react-router-dom";
 import { useEffect, useMemo, useState } from "react";
+import MapView from "./pages/MapView";
 import "./App.css";
 
 function Layout() {
@@ -56,6 +57,7 @@ function Layout() {
           </NavLink>
           <NavLink to="/molecules">Molecules</NavLink>
           <NavLink to="/pathways">Pathways</NavLink>
+          <NavLink to="/map">Map</NavLink>
           <NavLink to="/dashboard">Dashboard</NavLink>
           <NavLink to="/about">About</NavLink>
         </nav>
@@ -104,18 +106,6 @@ function Molecules() {
       <p>
         Placeholder for molecule cards, filters, and structural previews. Add
         details such as molecular weight, charge, and pathway assignments here.
-      </p>
-    </section>
-  );
-}
-
-function MapView() {
-  return (
-    <section className="content-panel">
-      <h2>Map Explorer</h2>
-      <p>
-        Sketch out pathway maps with story overlays, annotation pins, and
-        curated callouts for classroom walkthroughs.
       </p>
     </section>
   );
