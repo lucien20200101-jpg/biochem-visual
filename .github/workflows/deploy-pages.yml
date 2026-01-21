@@ -31,7 +31,7 @@ jobs:
           ls -la
           node -v && npm -v
           npm ci
-          ls -la node_modules/.bin | head -n 20
+          ls -la node_modules/.bin | head -n 50
       - name: Verify Vite installation
         run: ./node_modules/.bin/vite --version
       - name: Build
