@@ -14,7 +14,9 @@ export default function MainLayout() {
   return (
     <div className="app-shell">
       <header className="app-header">
-        <div className="brand">Biochem Visual</div>
+        <NavLink to="/" className="brand">
+          Biochem Visual
+        </NavLink>
         <nav className="nav">
           {navLinks.map((link) => (
             <NavLink
