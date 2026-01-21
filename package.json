@@ -1,0 +1,19 @@
+{
+  "name": "biochem-visual",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "file:packages/react",
+    "react-dom": "file:packages/react-dom"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "file:packages/plugin-react",
+    "vite": "file:packages/vite"
+  }
+}
