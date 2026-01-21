@@ -25,22 +25,28 @@ jobs:
         with:
           node-version: 20
           cache: npm
-          - name: Install dependencies
+
+      - name: Install dependencies
         working-directory: .
         env:
-        npm_config_production: "false"
-        npm_config_bin_links: "true"
+          npm_config_production: "false"
         run: |
-        npm config get bin-links
-        npm ci --include=dev
-        ls -la node_modules/.bin | head -n 50
+          npm ci --include=dev
+          ls -la node_modules/.bin | head -n 50
+
       - name: Verify Vite installation
         working-directory: .
-        run: node node_modules/vite/bin/vite.js --version
+        run: |
+          npx vite --version
+
       - name: Build
         working-directory: .
         run: npm run build
+
       - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
         uses: actions/upload-pages-artifact@v3
         with:
           path: dist
