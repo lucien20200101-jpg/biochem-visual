@@ -26,11 +26,11 @@ jobs:
           node-version: 20
           cache: npm
       - name: Install dependencies
-        run: npm ci
-      - name: Verify Vite installation
         run: |
+          pwd
+          ls -la
+          npm ci
           ls -la node_modules/.bin | head
-          ./node_modules/.bin/vite --version
       - name: Build
         run: npm run build
       - name: Upload Pages artifact
