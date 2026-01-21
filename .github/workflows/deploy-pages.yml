@@ -32,7 +32,6 @@ jobs:
           npm_config_production: "false"
         run: |
           npm ci --include=dev
-          ls -la node_modules/.bin | head -n 50
 
       - name: Verify Vite installation
         working-directory: .
