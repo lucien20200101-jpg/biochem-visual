@@ -7,6 +7,10 @@ export const mapNodes = [
       en: "Glucose",
       zh: TERMS.Glucose,
     },
+    label: {
+      en: "Glucose",
+      zh: "葡萄糖",
+    },
     tooltip: {
       en: "Primary fuel entering glycolysis.",
       zh: `进入${TERMS.Glycolysis}的主要燃料。`,
@@ -38,6 +42,10 @@ export const mapNodes = [
     name: {
       en: "G6P",
       zh: TERMS.G6P,
+    },
+    label: {
+      en: "G6P",
+      zh: "G6P",
     },
     tooltip: {
       en: "Committed to glycolytic flow.",
@@ -71,6 +79,10 @@ export const mapNodes = [
       en: "F6P",
       zh: TERMS.F6P,
     },
+    label: {
+      en: "F6P",
+      zh: "F6P",
+    },
     tooltip: {
       en: "Key precursor for phosphorylation.",
       zh: "磷酸化反应的关键前体。",
@@ -102,6 +114,10 @@ export const mapNodes = [
     name: {
       en: "FBP",
       zh: TERMS.FBP,
+    },
+    label: {
+      en: "FBP",
+      zh: "FBP",
     },
     tooltip: {
       en: "Energy investment checkpoint.",
@@ -135,6 +151,10 @@ export const mapNodes = [
       en: "G3P",
       zh: TERMS.G3P,
     },
+    label: {
+      en: "G3P",
+      zh: "G3P",
+    },
     tooltip: {
       en: "Triose phosphate in payoff phase.",
       zh: "收益阶段的三碳糖磷酸。",
@@ -166,6 +186,10 @@ export const mapNodes = [
     name: {
       en: "Pyruvate",
       zh: TERMS.Pyruvate,
+    },
+    label: {
+      en: "Pyruvate",
+      zh: "丙酮酸",
     },
     tooltip: {
       en: "End product of glycolysis.",
@@ -199,6 +223,10 @@ export const mapNodes = [
       en: "Acetyl-CoA",
       zh: TERMS.AcetylCoA,
     },
+    label: {
+      en: "Acetyl-CoA",
+      zh: "乙酰辅酶A",
+    },
     tooltip: {
       en: "Mitochondrial carbon entry.",
       zh: `进入${TERMS.Mitochondria}的碳源入口。`,
@@ -230,6 +258,10 @@ export const mapNodes = [
     name: {
       en: "Citrate",
       zh: TERMS.Citrate,
+    },
+    label: {
+      en: "Citrate",
+      zh: "柠檬酸",
     },
     tooltip: {
       en: "First TCA cycle intermediate.",
@@ -263,6 +295,10 @@ export const mapNodes = [
       en: "ATP",
       zh: TERMS.ATP,
     },
+    label: {
+      en: "ATP",
+      zh: "ATP",
+    },
     tooltip: {
       en: "Immediate energy currency.",
       zh: "即时能量货币。",
@@ -294,6 +330,10 @@ export const mapNodes = [
     name: {
       en: "NADH",
       zh: TERMS.NADH,
+    },
+    label: {
+      en: "NADH",
+      zh: "NADH",
     },
     tooltip: {
       en: "Reducing power for ATP synthesis.",
