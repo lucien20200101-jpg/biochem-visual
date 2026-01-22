@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
@@ -7,6 +7,7 @@ export default function SvgMapViewer({ mapUrl, nodes, onNodeClick }) {
   const { t, i18n } = useTranslation();
   const containerRef = useRef(null);
   const [hoveredNodeId, setHoveredNodeId] = useState(null);
+  const [baseSvgMarkup, setBaseSvgMarkup] = useState("");
   const [transform, setTransform] = useState({ x: 40, y: 20, scale: 1 });
   const [isPanning, setIsPanning] = useState(false);
   const [panStart, setPanStart] = useState({ x: 0, y: 0 });
@@ -30,6 +31,7 @@ export default function SvgMapViewer({ mapUrl, nodes, onNodeClick }) {
 
   const startPan = (event) => {
     if (event.button !== 0) return;
+    if (event.target?.closest?.(".map-node")) return;
     event.currentTarget.setPointerCapture(event.pointerId);
     setIsPanning(true);
     setPanStart({
@@ -53,7 +55,7 @@ export default function SvgMapViewer({ mapUrl, nodes, onNodeClick }) {
     setIsPanning(false);
   };
 
-  const handleWheel = (event) => {
+  const handleWheel = useCallback((event) => {
     event.preventDefault();
     const container = containerRef.current;
     if (!container) return;
@@ -72,7 +74,47 @@ export default function SvgMapViewer({ mapUrl, nodes, onNodeClick }) {
         y: pointerY - worldY * nextScale,
       };
     });
-  };
+  }, []);
+
+  useEffect(() => {
+    let isMounted = true;
+    const loadBaseSvg = async () => {
+      try {
+        const response = await fetch(mapUrl);
+        if (!response.ok) throw new Error("Failed to load base svg");
+        const svgText = await response.text();
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(svgText, "image/svg+xml");
+        doc.querySelectorAll("text, tspan, title, desc").forEach((node) => {
+          node.remove();
+        });
+        const svgEl = doc.querySelector("svg");
+        if (svgEl && isMounted) {
+          setBaseSvgMarkup(svgEl.innerHTML);
+        }
+      } catch (error) {
+        if (isMounted) {
+          setBaseSvgMarkup("");
+        }
+      }
+    };
+
+    if (mapUrl) {
+      loadBaseSvg();
+    }
+
+    return () => {
+      isMounted = false;
+    };
+  }, [mapUrl]);
+
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    const onWheel = (event) => handleWheel(event);
+    el.addEventListener("wheel", onWheel, { passive: false });
+    return () => el.removeEventListener("wheel", onWheel);
+  }, [handleWheel]);
 
   return (
     <div className="svg-map-shell">
@@ -99,7 +141,6 @@ export default function SvgMapViewer({ mapUrl, nodes, onNodeClick }) {
         onPointerMove={updatePan}
         onPointerUp={endPan}
         onPointerLeave={endPan}
-        onWheel={handleWheel}
       >
         <svg
           viewBox="0 0 900 520"
@@ -109,7 +150,14 @@ export default function SvgMapViewer({ mapUrl, nodes, onNodeClick }) {
           role="img"
         >
           <g transform={`translate(${transform.x} ${transform.y}) scale(${transform.scale})`}>
-            <image href={mapUrl} width="900" height="520" />
+            {baseSvgMarkup ? (
+              <g
+                className="svg-map-base"
+                dangerouslySetInnerHTML={{ __html: baseSvgMarkup }}
+              />
+            ) : (
+              <image href={mapUrl} width="900" height="520" />
+            )}
             <g className="map-node-layer">
               {nodes.map((node) => (
                 <g
@@ -134,17 +182,6 @@ export default function SvgMapViewer({ mapUrl, nodes, onNodeClick }) {
                       node.name?.[lang] ??
                       node.name?.en}
                   </text>
-                  <text
-                    className="map-node-label"
-                    x={node.x}
-                    y={node.y + 4}
-                    textAnchor="middle"
-                  >
-                    {node.label?.[lang] ??
-                      node.label?.en ??
-                      node.name?.[lang] ??
-                      node.name?.en}
-                  </text>
                 </g>
               ))}
               {hoveredNode ? (
@@ -157,11 +194,7 @@ export default function SvgMapViewer({ mapUrl, nodes, onNodeClick }) {
                     <tspan className="map-tooltip-title">
                       {getLocalizedField(hoveredNode.name)}
                     </tspan>
-                    <tspan className="map-tooltip-title">
-                      {getLocalizedField(hoveredNode.name)}
-                    </tspan>
                     <tspan x="12" y="40" className="map-tooltip-body">
-                      {getLocalizedField(hoveredNode.tooltip)}
                       {getLocalizedField(hoveredNode.tooltip)}
                     </tspan>
                   </text>
