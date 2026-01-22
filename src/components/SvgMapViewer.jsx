@@ -85,9 +85,6 @@ export default function SvgMapViewer({ mapUrl, nodes, onNodeClick }) {
         const svgText = await response.text();
         const parser = new DOMParser();
         const doc = parser.parseFromString(svgText, "image/svg+xml");
-        doc.querySelectorAll("text, tspan, title, desc").forEach((node) => {
-          node.remove();
-        });
         const svgEl = doc.querySelector("svg");
         if (svgEl && isMounted) {
           setBaseSvgMarkup(svgEl.innerHTML);
