@@ -59,7 +59,6 @@ export default function MapView() {
           <div className="map-info-card">
             <p className="map-info-label">{t("map.selectedNode")}</p>
             <h3>{selectedNode.name}</h3>
-            <h3>{selectedNode.name}</h3>
             <p className="map-info-summary">{selectedNode.description}</p>
             <div className="map-info-meta">
               <div>

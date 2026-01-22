@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
@@ -24,10 +23,6 @@ export default function SvgMapViewer({ mapUrl, nodes, onNodeClick }) {
     onNodeClick?.(node);
   };
 
-  const handleNodeClick = (node) => {
-    onNodeClick?.(node);
-  };
-
   const getLocalizedField = (field) => {
     if (!field) return "";
     if (typeof field === "string") return field;
@@ -36,7 +31,6 @@ export default function SvgMapViewer({ mapUrl, nodes, onNodeClick }) {
 
   const startPan = (event) => {
     if (event.button !== 0) return;
-    if (event.target?.closest?.(".map-node")) return;
     if (event.target?.closest?.(".map-node")) return;
 
     event.currentTarget.setPointerCapture(event.pointerId);
@@ -62,7 +56,6 @@ export default function SvgMapViewer({ mapUrl, nodes, onNodeClick }) {
     setIsPanning(false);
   };
 
-  const handleWheel = useCallback((event) => {
   const handleWheel = useCallback((event) => {
     event.preventDefault();
     const container = containerRef.current;
@@ -119,21 +112,9 @@ export default function SvgMapViewer({ mapUrl, nodes, onNodeClick }) {
   useEffect(() => {
     const el = containerRef.current;
     if (!el) return;
-    const onWheel = (event) => handleWheel(event);
-    el.addEventListener("wheel", onWheel, { passive: false });
-    return () => el.removeEventListener("wheel", onWheel);
+    el.addEventListener("wheel", handleWheel, { passive: false });
+    return () => el.removeEventListener("wheel", handleWheel);
   }, [handleWheel]);
-  }, []);
-useEffect(() => {
-  const el = containerRef.current;
-  if (!el) return;
-
-  el.addEventListener("wheel", handleWheel, { passive: false });
-
-  return () => {
-    el.removeEventListener("wheel", handleWheel);
-  };
-}, [handleWheel]);
 
   return (
     <div className="svg-map-shell">
@@ -187,7 +168,6 @@ useEffect(() => {
                   onMouseEnter={() => setHoveredNodeId(node.id)}
                   onMouseLeave={() => setHoveredNodeId(null)}
                   onClick={() => handleNodeClick(node)}
-                  onClick={() => handleNodeClick(node)}
                 >
                   <circle cx={node.x} cy={node.y} r={26} />
                   <circle className="map-node-core" cx={node.x} cy={node.y} r={8} />
@@ -216,11 +196,7 @@ useEffect(() => {
                     <tspan className="map-tooltip-title">
                       {getLocalizedField(hoveredNode.name)}
                     </tspan>
-                    <tspan className="map-tooltip-title">
-                      {getLocalizedField(hoveredNode.name)}
-                    </tspan>
                     <tspan x="12" y="40" className="map-tooltip-body">
-                      {getLocalizedField(hoveredNode.tooltip)}
                       {getLocalizedField(hoveredNode.tooltip)}
                     </tspan>
                   </text>
