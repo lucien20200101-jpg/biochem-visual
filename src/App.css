@@ -234,6 +234,14 @@
   cursor: grabbing;
 }
 
+.svg-map-shell svg text {
+  pointer-events: none;
+}
+
+.svg-map-shell svg text:not(.map-node-label) {
+  display: none;
+}
+
 .map-node {
   cursor: pointer;
 }

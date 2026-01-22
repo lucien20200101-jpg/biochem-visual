@@ -42,7 +42,7 @@ export default function MapView() {
 
   useEffect(() => {
     console.log("[selected change]", selectedNodeId, selectedNode?.name);
-  }, [selectedNodeId]);
+  }, [selectedNodeId, selectedNode]);
 
   return (
     <section className="map-page">
