@@ -4,17 +4,24 @@ import { useTranslation } from "react-i18next";
 const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
 
 export default function SvgMapViewer({ mapUrl, nodes, onSelect }) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const containerRef = useRef(null);
   const [hoveredNodeId, setHoveredNodeId] = useState(null);
   const [transform, setTransform] = useState({ x: 40, y: 20, scale: 1 });
   const [isPanning, setIsPanning] = useState(false);
   const [panStart, setPanStart] = useState({ x: 0, y: 0 });
+  const lang = i18n.language?.startsWith("zh") ? "zh" : "en";
 
   const hoveredNode = useMemo(
     () => nodes.find((node) => node.id === hoveredNodeId) ?? null,
     [hoveredNodeId, nodes]
   );
+
+  const getLocalizedField = (field) => {
+    if (!field) return "";
+    if (typeof field === "string") return field;
+    return field[lang] ?? field.en ?? "";
+  };
 
   const startPan = (event) => {
     if (event.button !== 0) return;
@@ -111,6 +118,17 @@ export default function SvgMapViewer({ mapUrl, nodes, onSelect }) {
                 >
                   <circle cx={node.x} cy={node.y} r={26} />
                   <circle className="map-node-core" cx={node.x} cy={node.y} r={8} />
+                  <text
+                    className="map-node-label"
+                    x={node.x}
+                    y={node.y + 4}
+                    textAnchor="middle"
+                  >
+                    {node.label?.[lang] ??
+                      node.label?.en ??
+                      node.name?.[lang] ??
+                      node.name?.en}
+                  </text>
                 </g>
               ))}
               {hoveredNode ? (
@@ -120,9 +138,11 @@ export default function SvgMapViewer({ mapUrl, nodes, onSelect }) {
                 >
                   <rect width="200" height="52" rx="10" />
                   <text x="12" y="22">
-                    <tspan className="map-tooltip-title">{hoveredNode.label}</tspan>
+                    <tspan className="map-tooltip-title">
+                      {getLocalizedField(hoveredNode.name)}
+                    </tspan>
                     <tspan x="12" y="40" className="map-tooltip-body">
-                      {hoveredNode.tooltip}
+                      {getLocalizedField(hoveredNode.tooltip)}
                     </tspan>
                   </text>
                 </g>

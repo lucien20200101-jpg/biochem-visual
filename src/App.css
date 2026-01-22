@@ -262,6 +262,13 @@
   fill: var(--theme-accent);
 }
 
+.map-node-label {
+  font-size: 0.65rem;
+  font-weight: 600;
+  fill: var(--theme-text);
+  pointer-events: none;
+}
+
 .map-tooltip rect {
   fill: #fff;
   stroke: var(--theme-border);
