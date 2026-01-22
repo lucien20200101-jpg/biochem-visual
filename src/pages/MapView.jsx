@@ -24,8 +24,7 @@ export default function MapView() {
   const localizedNodes = useMemo(
     () =>
       mapNodes.map((node) => ({
-        id: node.id,
-        key: node.key,
+        ...node,
         name: getLocalizedField(node.name, lang),
         description: getLocalizedField(node.description, lang),
         location: getLocalizedField(node.location, lang),
@@ -39,7 +38,6 @@ export default function MapView() {
       localizedNodes[0],
     [localizedNodes, selectedNodeId]
   );
-  console.log("[selected]", selectedNodeId, selectedNode?.name);
 
   return (
     <section className="map-page">
@@ -50,15 +48,12 @@ export default function MapView() {
       <div className="map-page-grid">
         <SvgMapViewer
           mapUrl={mapSvg}
-          nodes={mapNodes}
-          onSelect={(node) => setSelectedNodeId(node.id)}
-          nodes={mapNodes}
+          nodes={localizedNodes}
           onNodeClick={(node) => setSelectedNodeId(node.id)}
         />
         <aside className="map-info-panel" aria-live="polite">
           <div className="map-info-card">
             <p className="map-info-label">{t("map.selectedNode")}</p>
-            <h3>{selectedNode.name}</h3>
             <h3>{selectedNode.name}</h3>
             <p className="map-info-summary">{selectedNode.description}</p>
             <div className="map-info-meta">

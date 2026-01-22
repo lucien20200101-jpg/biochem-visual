@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
@@ -18,7 +18,6 @@ export default function SvgMapViewer({ mapUrl, nodes, onNodeClick }) {
   );
 
   const handleNodeClick = (node) => {
-    console.log("[node click]", node.id, node.name);
     onNodeClick?.(node);
   };
 
@@ -30,6 +29,8 @@ export default function SvgMapViewer({ mapUrl, nodes, onNodeClick }) {
 
   const startPan = (event) => {
     if (event.button !== 0) return;
+    if (event.target?.closest?.(".map-node")) return;
+
     event.currentTarget.setPointerCapture(event.pointerId);
     setIsPanning(true);
     setPanStart({
@@ -53,7 +54,7 @@ export default function SvgMapViewer({ mapUrl, nodes, onNodeClick }) {
     setIsPanning(false);
   };
 
-  const handleWheel = (event) => {
+  const handleWheel = useCallback((event) => {
     event.preventDefault();
     const container = containerRef.current;
     if (!container) return;
@@ -72,7 +73,17 @@ export default function SvgMapViewer({ mapUrl, nodes, onNodeClick }) {
         y: pointerY - worldY * nextScale,
       };
     });
+  }, []);
+useEffect(() => {
+  const el = containerRef.current;
+  if (!el) return;
+
+  el.addEventListener("wheel", handleWheel, { passive: false });
+
+  return () => {
+    el.removeEventListener("wheel", handleWheel);
   };
+}, [handleWheel]);
 
   return (
     <div className="svg-map-shell">
@@ -99,7 +110,6 @@ export default function SvgMapViewer({ mapUrl, nodes, onNodeClick }) {
         onPointerMove={updatePan}
         onPointerUp={endPan}
         onPointerLeave={endPan}
-        onWheel={handleWheel}
       >
         <svg
           viewBox="0 0 900 520"
@@ -132,18 +142,9 @@ export default function SvgMapViewer({ mapUrl, nodes, onNodeClick }) {
                     {node.label?.[lang] ??
                       node.label?.en ??
                       node.name?.[lang] ??
-                      node.name?.en}
-                  </text>
-                  <text
-                    className="map-node-label"
-                    x={node.x}
-                    y={node.y + 4}
-                    textAnchor="middle"
-                  >
-                    {node.label?.[lang] ??
-                      node.label?.en ??
-                      node.name?.[lang] ??
-                      node.name?.en}
+                      node.name?.en ??
+                      node.id ??
+                      ""}
                   </text>
                 </g>
               ))}
