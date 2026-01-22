@@ -154,9 +154,10 @@ export default function SvgMapViewer({ mapUrl, nodes, onNodeClick }) {
               <g
                 className="svg-map-base"
                 dangerouslySetInnerHTML={{ __html: baseSvgMarkup }}
+                style={{ pointerEvents: "none" }}
               />
             ) : (
-              <image href={mapUrl} width="900" height="520" />
+              <image href={mapUrl} width="900" height="520" style={{ pointerEvents: "none" }} />
             )}
             <g className="map-node-layer">
               {nodes.map((node) => (
