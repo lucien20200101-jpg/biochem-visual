@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
@@ -10,6 +10,7 @@ export default function SvgMapViewer({ mapUrl, nodes, onNodeClick }) {
   const [transform, setTransform] = useState({ x: 40, y: 20, scale: 1 });
   const [isPanning, setIsPanning] = useState(false);
   const [panStart, setPanStart] = useState({ x: 0, y: 0 });
+  const [mapMarkup, setMapMarkup] = useState("");
   const lang = i18n.language?.startsWith("zh") ? "zh" : "en";
 
   const hoveredNode = useMemo(
@@ -21,6 +22,42 @@ export default function SvgMapViewer({ mapUrl, nodes, onNodeClick }) {
     console.log("[node click]", node.id, node.name);
     onNodeClick?.(node);
   };
+
+  useEffect(() => {
+    if (!mapUrl) {
+      setMapMarkup("");
+      return;
+    }
+
+    let isActive = true;
+
+    const loadSvg = async () => {
+      try {
+        const response = await fetch(mapUrl);
+        const svgText = await response.text();
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(svgText, "image/svg+xml");
+        doc.querySelectorAll("text, tspan, title, desc").forEach((node) => {
+          node.remove();
+        });
+        const sanitized = doc.documentElement?.innerHTML ?? "";
+        if (isActive) {
+          setMapMarkup(sanitized);
+        }
+      } catch (error) {
+        console.error("Failed to load map SVG", error);
+        if (isActive) {
+          setMapMarkup("");
+        }
+      }
+    };
+
+    loadSvg();
+
+    return () => {
+      isActive = false;
+    };
+  }, [mapUrl]);
 
   const getLocalizedField = (field) => {
     if (!field) return "";
@@ -109,7 +146,11 @@ export default function SvgMapViewer({ mapUrl, nodes, onNodeClick }) {
           role="img"
         >
           <g transform={`translate(${transform.x} ${transform.y}) scale(${transform.scale})`}>
-            <image href={mapUrl} width="900" height="520" />
+            <g
+              className="map-base-layer"
+              style={{ pointerEvents: "none" }}
+              dangerouslySetInnerHTML={{ __html: mapMarkup }}
+            />
             <g className="map-node-layer">
               {nodes.map((node) => (
                 <g
@@ -119,21 +160,14 @@ export default function SvgMapViewer({ mapUrl, nodes, onNodeClick }) {
                   } ${node.key ? "is-key" : ""}`}
                   onMouseEnter={() => setHoveredNodeId(node.id)}
                   onMouseLeave={() => setHoveredNodeId(null)}
-                  onClick={() => handleNodeClick(node)}
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    handleNodeClick(node);
+                  }}
+                  style={{ cursor: "pointer" }}
                 >
                   <circle cx={node.x} cy={node.y} r={26} />
                   <circle className="map-node-core" cx={node.x} cy={node.y} r={8} />
-                  <text
-                    className="map-node-label"
-                    x={node.x}
-                    y={node.y + 4}
-                    textAnchor="middle"
-                  >
-                    {node.label?.[lang] ??
-                      node.label?.en ??
-                      node.name?.[lang] ??
-                      node.name?.en}
-                  </text>
                   <text
                     className="map-node-label"
                     x={node.x}
@@ -157,11 +191,7 @@ export default function SvgMapViewer({ mapUrl, nodes, onNodeClick }) {
                     <tspan className="map-tooltip-title">
                       {getLocalizedField(hoveredNode.name)}
                     </tspan>
-                    <tspan className="map-tooltip-title">
-                      {getLocalizedField(hoveredNode.name)}
-                    </tspan>
                     <tspan x="12" y="40" className="map-tooltip-body">
-                      {getLocalizedField(hoveredNode.tooltip)}
                       {getLocalizedField(hoveredNode.tooltip)}
                     </tspan>
                   </text>
