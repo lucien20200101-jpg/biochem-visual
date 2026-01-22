@@ -269,6 +269,14 @@
   pointer-events: none;
 }
 
+/* Hide original SVG text elements to prevent duplication */
+.svg-map-base text,
+.svg-map-base tspan,
+.svg-map-base title,
+.svg-map-base desc {
+  display: none;
+}
+
 .map-tooltip rect {
   fill: #fff;
   stroke: var(--theme-border);
