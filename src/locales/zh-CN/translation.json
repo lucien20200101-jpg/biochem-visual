@@ -1,0 +1,186 @@
+{
+  "app": {
+    "brand": "Biochem Visual",
+    "title": "生化通路探索器",
+    "subtitle": "浏览通路、查看分子，并通过交互式布局组合自定义视图。",
+    "footerVersion": "布局 v0.1",
+    "footerNote": "数据面板与可视化即将上线。"
+  },
+  "nav": {
+    "primaryLabel": "主导航",
+    "home": "主页",
+    "molecules": "分子",
+    "pathways": "通路",
+    "map": "地图",
+    "dashboard": "仪表盘",
+    "about": "关于"
+  },
+  "theme": {
+    "label": "主题",
+    "auto": "自动（随路由）",
+    "manuscript": "手稿",
+    "glass": "玻璃",
+    "dashboard": "仪表盘"
+  },
+  "language": {
+    "label": "语言",
+    "english": "EN",
+    "chinese": "中文"
+  },
+  "home": {
+    "welcomeTitle": "欢迎",
+    "welcomeIntro": "从精选的生化通路总览开始，连接相关分子以构建互动叙事。",
+    "feature1": "浏览精选通路地图。",
+    "feature2": "固定分子以比较反应。",
+    "feature3": "为课堂讲解准备仪表盘。"
+  },
+  "molecules": {
+    "title": "分子库",
+    "description": "分子卡片、筛选器与结构预览的占位区域。可在此补充分子量、电荷与通路归属等信息。"
+  },
+  "learn": {
+    "title": "学习模块",
+    "description": "学习模块将通过引导步骤、测验与上下文分子提示介绍通路概念。"
+  },
+  "pathways": {
+    "title": "通路地图",
+    "description": "交互式通路图的占位区域，将提供缩放、标注与导出工具。"
+  },
+  "dashboard": {
+    "title": "仪表盘概览",
+    "description": "以结构化、数据驱动的布局追踪通路覆盖、学习里程碑与分子互动。"
+  },
+  "wrongbook": {
+    "title": "错题本回顾",
+    "description": "记录常见错误、实验笔记与改进步骤，让复盘更有针对性。"
+  },
+  "about": {
+    "title": "关于项目",
+    "description": "Biochem Visual 旨在通过交互式叙事让代谢与信号通路更易理解。本页面可补充团队信息、参考资料与路线图更新。"
+  },
+  "map": {
+    "title": "迷你代谢图",
+    "subtitle": "手稿通路视图的最小交互脚手架。",
+    "canvasEyebrow": "全局代谢",
+    "canvasTitle": "交互式地图画布",
+    "canvasDescription": "拖拽平移，滚动缩放，点击节点在右侧查看详情。",
+    "resetView": "重置视图",
+    "canvasAriaLabel": "迷你代谢图",
+    "selectedNode": "已选节点",
+    "location": "位置",
+    "status": "状态",
+    "keyCheckpoint": "关键检查点",
+    "standardNode": "普通节点",
+    "highlights": "要点",
+    "openReactionTimeline": "打开反应时间线",
+    "nextStepsTitle": "下一步",
+    "nextStepsDescription": "替换为完整通路 SVG，并用真实代谢物元数据填充这些面板。",
+    "nodes": {
+      "glucose": {
+        "label": "葡萄糖",
+        "tooltip": "进入糖酵解的主要燃料。",
+        "description": "糖酵解与磷酸戊糖途径的入口点。",
+        "location": "细胞质",
+        "details": [
+          "为糖酵解与糖原储备提供底物。",
+          "在胰岛素敏感组织中摄取受严格调控。"
+        ]
+      },
+      "g6p": {
+        "label": "G6P",
+        "tooltip": "进入糖酵解流程的承诺步骤。",
+        "description": "葡萄糖-6-磷酸在能量与生物合成之间平衡。",
+        "location": "细胞质",
+        "details": [
+          "通往磷酸戊糖途径的分支点。",
+          "由磷酸葡萄糖异构酶催化转化。"
+        ]
+      },
+      "f6p": {
+        "label": "F6P",
+        "tooltip": "磷酸化反应的关键前体。",
+        "description": "果糖-6-磷酸为能量投入阶段做准备。",
+        "location": "细胞质",
+        "details": [
+          "受磷酸果糖激酶调控。",
+          "进入糖酵解与氨基糖合成。"
+        ]
+      },
+      "fbp": {
+        "label": "FBP",
+        "tooltip": "能量投入的检查点。",
+        "description": "果糖-1,6-二磷酸裂解为三碳糖。",
+        "location": "细胞质",
+        "details": [
+          "被醛缩酶裂解为 G3P 与 DHAP。",
+          "标志糖酵解的承诺步骤。"
+        ]
+      },
+      "g3p": {
+        "label": "G3P",
+        "tooltip": "收益阶段的三碳糖磷酸。",
+        "description": "甘油醛-3-磷酸推动 ATP 生成。",
+        "location": "细胞质",
+        "details": [
+          "被氧化生成 NADH。",
+          "下游转化为丙酮酸。"
+        ]
+      },
+      "pyruvate": {
+        "label": "丙酮酸",
+        "tooltip": "糖酵解的终产物。",
+        "description": "丙酮酸连接糖酵解与线粒体进入。",
+        "location": "细胞质 → 线粒体",
+        "details": [
+          "经丙酮酸脱氢酶转化为乙酰辅酶 A。",
+          "在无氧状态下支持发酵。"
+        ]
+      },
+      "acetylCoa": {
+        "label": "乙酰辅酶 A",
+        "tooltip": "线粒体碳源入口。",
+        "description": "乙酰辅酶 A 为 TCA 循环与脂质合成供能。",
+        "location": "线粒体",
+        "details": [
+          "由丙酮酸脱氢酶复合体生成。",
+          "进入柠檬酸合成酶启动 TCA 循环。"
+        ]
+      },
+      "citrate": {
+        "label": "柠檬酸",
+        "tooltip": "TCA 循环的第一个中间体。",
+        "description": "柠檬酸向细胞质传递能量富足信号。",
+        "location": "线粒体",
+        "details": [
+          "可输出线粒体用于脂质合成。",
+          "变构抑制磷酸果糖激酶。"
+        ]
+      },
+      "atp": {
+        "label": "ATP",
+        "tooltip": "即时能量货币。",
+        "description": "ATP 水平决定通路节流。",
+        "location": "全细胞",
+        "details": [
+          "在糖酵解与氧化磷酸化中生成。",
+          "充足时抑制早期糖酵解。"
+        ]
+      },
+      "nadh": {
+        "label": "NADH",
+        "tooltip": "ATP 合成所需的还原力。",
+        "description": "NADH 将电子传递至呼吸链。",
+        "location": "线粒体",
+        "details": [
+          "在糖酵解与 TCA 循环中产生。",
+          "提供电子以生成 ATP。"
+        ]
+      }
+    }
+  },
+  "common": {
+    "loading": "加载中…",
+    "empty": "暂无数据。",
+    "error": "出现错误。"
+  }
+}
