@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import SvgMapViewer from "../components/SvgMapViewer";
 import mapSvg from "../assets/maps/mini-metabolism.svg";
@@ -39,6 +39,10 @@ export default function MapView() {
     [localizedNodes, selectedNodeId]
   );
 
+  useEffect(() => {
+    console.log("[selected change]", selectedNodeId, selectedNode?.name);
+  }, [selectedNodeId]);
+
   return (
     <section className="map-page">
       <header className="map-page-header">
@@ -54,6 +58,7 @@ export default function MapView() {
         <aside className="map-info-panel" aria-live="polite">
           <div className="map-info-card">
             <p className="map-info-label">{t("map.selectedNode")}</p>
+            <h3>{selectedNode.name}</h3>
             <h3>{selectedNode.name}</h3>
             <p className="map-info-summary">{selectedNode.description}</p>
             <div className="map-info-meta">
