@@ -1,0 +1,18 @@
+export const TERMS = {
+  ATP: "三磷酸腺苷（ATP）",
+  NADH: "烟酰胺腺嘌呤二核苷酸（NADH）",
+  FADH2: "黄素腺嘌呤二核苷酸（FADH2）",
+  AcetylCoA: "乙酰辅酶A（Acetyl-CoA）",
+  Glucose: "葡萄糖（Glucose）",
+  G6P: "葡萄糖-6-磷酸（G6P）",
+  F6P: "果糖-6-磷酸（F6P）",
+  FBP: "果糖-1,6-二磷酸（FBP）",
+  G3P: "甘油醛-3-磷酸（G3P）",
+  Pyruvate: "丙酮酸（Pyruvate）",
+  Citrate: "柠檬酸（Citrate）",
+  Glycolysis: "糖酵解（Glycolysis）",
+  TCA: "三羧酸循环（TCA cycle）",
+  Cytosol: "细胞质（Cytosol）",
+  Mitochondria: "线粒体（Mitochondria）",
+  PPP: "磷酸戊糖途径（PPP）",
+};
