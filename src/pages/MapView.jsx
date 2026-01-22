@@ -5,11 +5,25 @@ import mapSvg from "../assets/maps/mini-metabolism.svg";
 import { mapNodes } from "../data/mapData";
 
 export default function MapView() {
-  const { t } = useTranslation();
-  const [selectedNode, setSelectedNode] = useState(mapNodes[0]);
-  const details = useMemo(
-    () => selectedNode?.details ?? [],
-    [selectedNode]
+  const { t, i18n } = useTranslation();
+  const [selectedNodeId, setSelectedNodeId] = useState(mapNodes[0].id);
+  const localizedNodes = useMemo(
+    () =>
+      mapNodes.map((node) => ({
+        ...node,
+        label: t(node.labelKey),
+        tooltip: t(node.tooltipKey),
+        description: t(node.descriptionKey),
+        location: t(node.locationKey),
+        details: node.detailsKeys.map((key) => t(key)),
+      })),
+    [t, i18n.language]
+  );
+  const selectedNode = useMemo(
+    () =>
+      localizedNodes.find((node) => node.id === selectedNodeId) ??
+      localizedNodes[0],
+    [localizedNodes, selectedNodeId]
   );
 
   return (
@@ -21,8 +35,8 @@ export default function MapView() {
       <div className="map-page-grid">
         <SvgMapViewer
           mapUrl={mapSvg}
-          nodes={mapNodes}
-          onSelect={setSelectedNode}
+          nodes={localizedNodes}
+          onSelect={(node) => setSelectedNodeId(node.id)}
         />
         <aside className="map-info-panel" aria-live="polite">
           <div className="map-info-card">
@@ -44,7 +58,7 @@ export default function MapView() {
             <div className="map-info-list">
               <p className="map-info-title">{t("map.highlights")}</p>
               <ul>
-                {details.map((item) => (
+                {selectedNode.details.map((item) => (
                   <li key={item}>{item}</li>
                 ))}
               </ul>

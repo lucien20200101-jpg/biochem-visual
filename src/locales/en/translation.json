@@ -1,0 +1,186 @@
+{
+  "app": {
+    "brand": "Biochem Visual",
+    "title": "Biochemical Pathway Explorer",
+    "subtitle": "Navigate pathways, inspect molecules, and assemble custom views with interactive layouts.",
+    "footerVersion": "Layout v0.1",
+    "footerNote": "Data panels and visualizations coming next."
+  },
+  "nav": {
+    "primaryLabel": "Primary navigation",
+    "home": "Home",
+    "molecules": "Molecules",
+    "pathways": "Pathways",
+    "map": "Map",
+    "dashboard": "Dashboard",
+    "about": "About"
+  },
+  "theme": {
+    "label": "Theme",
+    "auto": "Auto (route)",
+    "manuscript": "Manuscript",
+    "glass": "Glass",
+    "dashboard": "Dashboard"
+  },
+  "language": {
+    "label": "Language",
+    "english": "EN",
+    "chinese": "中文"
+  },
+  "home": {
+    "welcomeTitle": "Welcome",
+    "welcomeIntro": "Start with an overview of curated biochemical pathways and connect related molecules to build interactive stories.",
+    "feature1": "Browse curated pathway maps.",
+    "feature2": "Pin molecules to compare reactions.",
+    "feature3": "Prepare dashboards for classroom walkthroughs."
+  },
+  "molecules": {
+    "title": "Molecule Library",
+    "description": "Placeholder for molecule cards, filters, and structural previews. Add details such as molecular weight, charge, and pathway assignments here."
+  },
+  "learn": {
+    "title": "Learn Modules",
+    "description": "Learning modules will introduce pathway concepts with guided steps, quizzes, and contextual molecule highlights."
+  },
+  "pathways": {
+    "title": "Pathway Maps",
+    "description": "Placeholder for interactive pathway diagrams. This area will host zoom, annotations, and export tools."
+  },
+  "dashboard": {
+    "title": "Dashboard Overview",
+    "description": "Track pathway coverage, learning milestones, and molecule engagement with a structured, data-driven layout."
+  },
+  "wrongbook": {
+    "title": "Wrongbook Review",
+    "description": "Capture common mistakes, lab notes, and remediation steps to make review sessions more targeted."
+  },
+  "about": {
+    "title": "About the Project",
+    "description": "Biochem Visual is designed to make metabolic and signaling pathways accessible through interactive storytelling. This page can include team details, references, and roadmap updates."
+  },
+  "map": {
+    "title": "Mini Metabolism Map",
+    "subtitle": "Minimal interactive scaffold for the manuscript pathway view.",
+    "canvasEyebrow": "Global Metabolism",
+    "canvasTitle": "Interactive Map Canvas",
+    "canvasDescription": "Drag to pan, scroll to zoom, and select nodes to open details on the right.",
+    "resetView": "Reset view",
+    "canvasAriaLabel": "Mini metabolism map",
+    "selectedNode": "Selected node",
+    "location": "Location",
+    "status": "Status",
+    "keyCheckpoint": "Key checkpoint",
+    "standardNode": "Standard node",
+    "highlights": "Highlights",
+    "openReactionTimeline": "Open reaction timeline",
+    "nextStepsTitle": "Next steps",
+    "nextStepsDescription": "Swap in the full pathway SVG and hydrate these panels with real metabolite metadata.",
+    "nodes": {
+      "glucose": {
+        "label": "Glucose",
+        "tooltip": "Primary fuel entering glycolysis.",
+        "description": "Entry point for glycolysis and pentose phosphate routing.",
+        "location": "Cytosol",
+        "details": [
+          "Feeds glycolysis and glycogen storage.",
+          "Highly regulated uptake in insulin-sensitive tissues."
+        ]
+      },
+      "g6p": {
+        "label": "G6P",
+        "tooltip": "Committed to glycolytic flow.",
+        "description": "Glucose-6-phosphate balances energy and biosynthesis.",
+        "location": "Cytosol",
+        "details": [
+          "Branch point into pentose phosphate pathway.",
+          "Converted by phosphoglucose isomerase."
+        ]
+      },
+      "f6p": {
+        "label": "F6P",
+        "tooltip": "Key precursor for phosphorylation.",
+        "description": "Fructose-6-phosphate prepares for energy investment.",
+        "location": "Cytosol",
+        "details": [
+          "Regulated by phosphofructokinase.",
+          "Feeds glycolysis and amino sugar synthesis."
+        ]
+      },
+      "fbp": {
+        "label": "FBP",
+        "tooltip": "Energy investment checkpoint.",
+        "description": "Fructose-1,6-bisphosphate splits into triose sugars.",
+        "location": "Cytosol",
+        "details": [
+          "Cleaved by aldolase into G3P and DHAP.",
+          "Marks committed step in glycolysis."
+        ]
+      },
+      "g3p": {
+        "label": "G3P",
+        "tooltip": "Triose phosphate in payoff phase.",
+        "description": "Glyceraldehyde-3-phosphate drives ATP yield.",
+        "location": "Cytosol",
+        "details": [
+          "Oxidized to generate NADH.",
+          "Converts to pyruvate downstream."
+        ]
+      },
+      "pyruvate": {
+        "label": "Pyruvate",
+        "tooltip": "End product of glycolysis.",
+        "description": "Pyruvate connects glycolysis to mitochondrial entry.",
+        "location": "Cytosol → Mitochondria",
+        "details": [
+          "Converted to acetyl-CoA via pyruvate dehydrogenase.",
+          "Supports fermentation in anaerobic states."
+        ]
+      },
+      "acetylCoa": {
+        "label": "Acetyl-CoA",
+        "tooltip": "Mitochondrial carbon entry.",
+        "description": "Acetyl-CoA fuels the TCA cycle and lipid synthesis.",
+        "location": "Mitochondria",
+        "details": [
+          "Generated by pyruvate dehydrogenase complex.",
+          "Feeds citrate synthase to start TCA cycle."
+        ]
+      },
+      "citrate": {
+        "label": "Citrate",
+        "tooltip": "First TCA cycle intermediate.",
+        "description": "Citrate signals energy abundance to the cytosol.",
+        "location": "Mitochondria",
+        "details": [
+          "Exits mitochondria for lipid synthesis.",
+          "Allosterically inhibits phosphofructokinase."
+        ]
+      },
+      "atp": {
+        "label": "ATP",
+        "tooltip": "Immediate energy currency.",
+        "description": "ATP levels inform pathway throttling.",
+        "location": "Cell-wide",
+        "details": [
+          "Produced in glycolysis and oxidative phosphorylation.",
+          "Inhibits early glycolysis when abundant."
+        ]
+      },
+      "nadh": {
+        "label": "NADH",
+        "tooltip": "Reducing power for ATP synthesis.",
+        "description": "NADH shuttles electrons to the respiratory chain.",
+        "location": "Mitochondria",
+        "details": [
+          "Generated in glycolysis and TCA cycle.",
+          "Donates electrons to produce ATP."
+        ]
+      }
+    }
+  },
+  "common": {
+    "loading": "Loading...",
+    "empty": "No data available.",
+    "error": "Something went wrong."
+  }
+}
