@@ -26,16 +26,4 @@
     <circle cx="700" cy="220" r="22" />
     <circle cx="780" cy="260" r="22" />
   </g>
-  <g font-family="Source Serif 4, Iowan Old Style, serif" font-size="14" fill="#4b3621">
-    <text x="120" y="115" text-anchor="middle">Glucose</text>
-    <text x="240" y="155" text-anchor="middle">G6P</text>
-    <text x="360" y="195" text-anchor="middle">F6P</text>
-    <text x="440" y="255" text-anchor="middle">FBP</text>
-    <text x="520" y="315" text-anchor="middle">G3P</text>
-    <text x="420" y="355" text-anchor="middle">Pyruvate</text>
-    <text x="360" y="415" text-anchor="middle">Acetyl-CoA</text>
-    <text x="640" y="355" text-anchor="middle">Citrate</text>
-    <text x="700" y="215" text-anchor="middle">ATP</text>
-    <text x="780" y="255" text-anchor="middle">NADH</text>
-  </g>
 </svg>
