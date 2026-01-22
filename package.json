@@ -9,8 +9,10 @@
     "preview": "node node_modules/vite/bin/vite.js preview"
   },
   "dependencies": {
+    "i18next": "^23.12.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-i18next": "^14.1.1",
     "react-router-dom": "^6.26.2"
   },
   "devDependencies": {

@@ -1,10 +1,12 @@
 import { NavLink, Route, Routes, useLocation } from "react-router-dom";
 import { useEffect, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import MapView from "./pages/MapView";
 import "./App.css";
 
 function Layout() {
   const location = useLocation();
+  const { t, i18n } = useTranslation();
   const [manualTheme, setManualTheme] = useState("auto");
   const autoTheme = useMemo(() => {
     const { pathname } = location;
@@ -20,47 +22,81 @@ function Layout() {
     return "manuscript";
   }, [location]);
   const resolvedTheme = manualTheme === "auto" ? autoTheme : manualTheme;
+  const currentLanguage = i18n.language === "zh-CN" ? "zh-CN" : "en";
+
+  const handleLanguageChange = (lang) => {
+    i18n.changeLanguage(lang);
+    localStorage.setItem("lang", lang);
+  };
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", resolvedTheme);
   }, [resolvedTheme]);
 
+  useEffect(() => {
+    document.title = t("app.title");
+  }, [t, i18n.language]);
+
+  useEffect(() => {
+    document.documentElement.lang = currentLanguage;
+  }, [currentLanguage]);
+
   return (
     <div className="app-shell">
       <header className="app-header">
         <div>
-          <p className="app-eyebrow">Biochem Visual</p>
-          <h1>Biochemical Pathway Explorer</h1>
-          <p className="app-subtitle">
-            Navigate pathways, inspect molecules, and assemble custom views with
-            interactive layouts.
-          </p>
+          <p className="app-eyebrow">{t("app.brand")}</p>
+          <h1>{t("app.title")}</h1>
+          <p className="app-subtitle">{t("app.subtitle")}</p>
         </div>
         {import.meta.env.DEV ? (
           <div className="theme-switcher">
-            <label htmlFor="theme-select">Theme</label>
+            <label htmlFor="theme-select">{t("theme.label")}</label>
             <select
               id="theme-select"
               value={manualTheme}
               onChange={(event) => setManualTheme(event.target.value)}
             >
-              <option value="auto">Auto (route)</option>
-              <option value="manuscript">Manuscript</option>
-              <option value="glass">Glass</option>
-              <option value="dashboard">Dashboard</option>
+              <option value="auto">{t("theme.auto")}</option>
+              <option value="manuscript">{t("theme.manuscript")}</option>
+              <option value="glass">{t("theme.glass")}</option>
+              <option value="dashboard">{t("theme.dashboard")}</option>
             </select>
           </div>
         ) : null}
-        <nav className="app-nav" aria-label="Primary">
-          <NavLink to="/" end>
-            Home
-          </NavLink>
-          <NavLink to="/molecules">Molecules</NavLink>
-          <NavLink to="/pathways">Pathways</NavLink>
-          <NavLink to="/map">Map</NavLink>
-          <NavLink to="/dashboard">Dashboard</NavLink>
-          <NavLink to="/about">About</NavLink>
-        </nav>
+        <div className="app-nav-row">
+          <nav className="app-nav" aria-label={t("nav.primaryLabel")}>
+            <NavLink to="/" end>
+              {t("nav.home")}
+            </NavLink>
+            <NavLink to="/molecules">{t("nav.molecules")}</NavLink>
+            <NavLink to="/pathways">{t("nav.pathways")}</NavLink>
+            <NavLink to="/map">{t("nav.map")}</NavLink>
+            <NavLink to="/dashboard">{t("nav.dashboard")}</NavLink>
+            <NavLink to="/about">{t("nav.about")}</NavLink>
+          </nav>
+          <div className="language-switcher" role="group" aria-label={t("language.label")}>
+            <button
+              type="button"
+              className={currentLanguage === "en" ? "is-active" : ""}
+              aria-pressed={currentLanguage === "en"}
+              onClick={() => handleLanguageChange("en")}
+            >
+              {t("language.english")}
+            </button>
+            <span className="language-divider" aria-hidden="true">
+              |
+            </span>
+            <button
+              type="button"
+              className={currentLanguage === "zh-CN" ? "is-active" : ""}
+              aria-pressed={currentLanguage === "zh-CN"}
+              onClick={() => handleLanguageChange("zh-CN")}
+            >
+              {t("language.chinese")}
+            </button>
+          </div>
+        </div>
       </header>
       <main className="app-main">
         <Routes>
@@ -75,99 +111,84 @@ function Layout() {
         </Routes>
       </main>
       <footer className="app-footer">
-        <span>Layout v0.1</span>
-        <span>Data panels and visualizations coming next.</span>
+        <span>{t("app.footerVersion")}</span>
+        <span>{t("app.footerNote")}</span>
       </footer>
     </div>
   );
 }
 
 function Home() {
+  const { t } = useTranslation();
   return (
     <section className="content-panel">
-      <h2>Welcome</h2>
-      <p>
-        Start with an overview of curated biochemical pathways and connect
-        related molecules to build interactive stories.
-      </p>
+      <h2>{t("home.welcomeTitle")}</h2>
+      <p>{t("home.welcomeIntro")}</p>
       <ul>
-        <li>Browse curated pathway maps.</li>
-        <li>Pin molecules to compare reactions.</li>
-        <li>Prepare dashboards for classroom walkthroughs.</li>
+        <li>{t("home.feature1")}</li>
+        <li>{t("home.feature2")}</li>
+        <li>{t("home.feature3")}</li>
       </ul>
     </section>
   );
 }
 
 function Molecules() {
+  const { t } = useTranslation();
   return (
     <section className="content-panel">
-      <h2>Molecule Library</h2>
-      <p>
-        Placeholder for molecule cards, filters, and structural previews. Add
-        details such as molecular weight, charge, and pathway assignments here.
-      </p>
+      <h2>{t("molecules.title")}</h2>
+      <p>{t("molecules.description")}</p>
     </section>
   );
 }
 
 function Learn() {
+  const { t } = useTranslation();
   return (
     <section className="content-panel">
-      <h2>Learn Modules</h2>
-      <p>
-        Learning modules will introduce pathway concepts with guided steps,
-        quizzes, and contextual molecule highlights.
-      </p>
+      <h2>{t("learn.title")}</h2>
+      <p>{t("learn.description")}</p>
     </section>
   );
 }
 
 function Pathways() {
+  const { t } = useTranslation();
   return (
     <section className="content-panel">
-      <h2>Pathway Maps</h2>
-      <p>
-        Placeholder for interactive pathway diagrams. This area will host zoom,
-        annotations, and export tools.
-      </p>
+      <h2>{t("pathways.title")}</h2>
+      <p>{t("pathways.description")}</p>
     </section>
   );
 }
 
 function Dashboard() {
+  const { t } = useTranslation();
   return (
     <section className="content-panel">
-      <h2>Dashboard Overview</h2>
-      <p>
-        Track pathway coverage, learning milestones, and molecule engagement
-        with a structured, data-driven layout.
-      </p>
+      <h2>{t("dashboard.title")}</h2>
+      <p>{t("dashboard.description")}</p>
     </section>
   );
 }
 
 function Wrongbook() {
+  const { t } = useTranslation();
   return (
     <section className="content-panel">
-      <h2>Wrongbook Review</h2>
-      <p>
-        Capture common mistakes, lab notes, and remediation steps to make review
-        sessions more targeted.
-      </p>
+      <h2>{t("wrongbook.title")}</h2>
+      <p>{t("wrongbook.description")}</p>
     </section>
   );
 }
 
 function About() {
+  const { t } = useTranslation();
   return (
     <section className="content-panel">
-      <h2>About the Project</h2>
-      <p>
-        Biochem Visual is designed to make metabolic and signaling pathways
-        accessible through interactive storytelling. This page can include team
-        details, references, and roadmap updates.
-      </p>
+      <h2>{t("about.title")}</h2>
+      <p>{t("about.description")}</p>
     </section>
   );
 }
