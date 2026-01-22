@@ -4,20 +4,34 @@ import SvgMapViewer from "../components/SvgMapViewer";
 import mapSvg from "../assets/maps/mini-metabolism.svg";
 import { mapNodes } from "../data/mapData";
 
+const getLocalizedField = (field, lang) => {
+  if (!field) return "";
+  if (typeof field === "string") return field;
+  return field[lang] ?? field.en ?? "";
+};
+
+const getLocalizedList = (field, lang) => {
+  if (!field) return [];
+  if (Array.isArray(field)) return field;
+  return field[lang] ?? field.en ?? [];
+};
+
 export default function MapView() {
   const { t, i18n } = useTranslation();
   const [selectedNodeId, setSelectedNodeId] = useState(mapNodes[0].id);
+  const lang = i18n.language?.startsWith("zh") ? "zh" : "en";
+
   const localizedNodes = useMemo(
     () =>
       mapNodes.map((node) => ({
         ...node,
-        label: t(node.labelKey),
-        tooltip: t(node.tooltipKey),
-        description: t(node.descriptionKey),
-        location: t(node.locationKey),
-        details: node.detailsKeys.map((key) => t(key)),
+        label: getLocalizedField(node.name, lang),
+        tooltip: getLocalizedField(node.tooltip, lang),
+        description: getLocalizedField(node.description, lang),
+        location: getLocalizedField(node.location, lang),
+        details: getLocalizedList(node.bullets, lang),
       })),
-    [t, i18n.language]
+    [lang]
   );
   const selectedNode = useMemo(
     () =>

@@ -1,141 +1,323 @@
+import { TERMS } from "./terms";
+
 export const mapNodes = [
   {
     id: "glucose",
-    labelKey: "map.nodes.glucose.label",
-    tooltipKey: "map.nodes.glucose.tooltip",
-    descriptionKey: "map.nodes.glucose.description",
-    locationKey: "map.nodes.glucose.location",
+    name: {
+      en: "Glucose",
+      zh: TERMS.Glucose,
+    },
+    tooltip: {
+      en: "Primary fuel entering glycolysis.",
+      zh: `进入${TERMS.Glycolysis}的主要燃料。`,
+    },
+    description: {
+      en: "Entry point for glycolysis and pentose phosphate routing.",
+      zh: `作为${TERMS.Glycolysis}与${TERMS.PPP}的入口。`,
+    },
+    location: {
+      en: "Cytosol",
+      zh: TERMS.Cytosol,
+    },
     key: true,
-    detailsKeys: [
-      "map.nodes.glucose.details.0",
-      "map.nodes.glucose.details.1",
-    ],
+    bullets: {
+      en: [
+        "Feeds glycolysis and glycogen storage.",
+        "Highly regulated uptake in insulin-sensitive tissues.",
+      ],
+      zh: [
+        `为${TERMS.Glycolysis}与糖原储存提供底物。`,
+        "在胰岛素敏感组织中摄取受严格调控。",
+      ],
+    },
     x: 120,
     y: 120,
   },
   {
     id: "g6p",
-    labelKey: "map.nodes.g6p.label",
-    tooltipKey: "map.nodes.g6p.tooltip",
-    descriptionKey: "map.nodes.g6p.description",
-    locationKey: "map.nodes.g6p.location",
+    name: {
+      en: "G6P",
+      zh: TERMS.G6P,
+    },
+    tooltip: {
+      en: "Committed to glycolytic flow.",
+      zh: `进入${TERMS.Glycolysis}流程的承诺步骤。`,
+    },
+    description: {
+      en: "Glucose-6-phosphate balances energy and biosynthesis.",
+      zh: `${TERMS.G6P}在能量与生物合成之间平衡。`,
+    },
+    location: {
+      en: "Cytosol",
+      zh: TERMS.Cytosol,
+    },
     key: false,
-    detailsKeys: [
-      "map.nodes.g6p.details.0",
-      "map.nodes.g6p.details.1",
-    ],
+    bullets: {
+      en: [
+        "Branch point into pentose phosphate pathway.",
+        "Converted by phosphoglucose isomerase.",
+      ],
+      zh: [
+        `作为通往${TERMS.PPP}的分支点。`,
+        "由磷酸葡萄糖异构酶催化转化。",
+      ],
+    },
     x: 240,
     y: 160,
   },
   {
     id: "f6p",
-    labelKey: "map.nodes.f6p.label",
-    tooltipKey: "map.nodes.f6p.tooltip",
-    descriptionKey: "map.nodes.f6p.description",
-    locationKey: "map.nodes.f6p.location",
+    name: {
+      en: "F6P",
+      zh: TERMS.F6P,
+    },
+    tooltip: {
+      en: "Key precursor for phosphorylation.",
+      zh: "磷酸化反应的关键前体。",
+    },
+    description: {
+      en: "Fructose-6-phosphate prepares for energy investment.",
+      zh: `${TERMS.F6P}为能量投入阶段做准备。`,
+    },
+    location: {
+      en: "Cytosol",
+      zh: TERMS.Cytosol,
+    },
     key: false,
-    detailsKeys: [
-      "map.nodes.f6p.details.0",
-      "map.nodes.f6p.details.1",
-    ],
+    bullets: {
+      en: [
+        "Regulated by phosphofructokinase.",
+        "Feeds glycolysis and amino sugar synthesis.",
+      ],
+      zh: [
+        "受磷酸果糖激酶调控。",
+        `进入${TERMS.Glycolysis}与氨基糖合成。`,
+      ],
+    },
     x: 360,
     y: 200,
   },
   {
     id: "fbp",
-    labelKey: "map.nodes.fbp.label",
-    tooltipKey: "map.nodes.fbp.tooltip",
-    descriptionKey: "map.nodes.fbp.description",
-    locationKey: "map.nodes.fbp.location",
+    name: {
+      en: "FBP",
+      zh: TERMS.FBP,
+    },
+    tooltip: {
+      en: "Energy investment checkpoint.",
+      zh: "能量投入的检查点。",
+    },
+    description: {
+      en: "Fructose-1,6-bisphosphate splits into triose sugars.",
+      zh: `${TERMS.FBP}裂解为三碳糖。`,
+    },
+    location: {
+      en: "Cytosol",
+      zh: TERMS.Cytosol,
+    },
     key: true,
-    detailsKeys: [
-      "map.nodes.fbp.details.0",
-      "map.nodes.fbp.details.1",
-    ],
+    bullets: {
+      en: [
+        "Cleaved by aldolase into G3P and DHAP.",
+        "Marks committed step in glycolysis.",
+      ],
+      zh: [
+        `被醛缩酶裂解为${TERMS.G3P}与二羟基丙酮磷酸（DHAP）。`,
+        `标志${TERMS.Glycolysis}的承诺步骤。`,
+      ],
+    },
     x: 440,
     y: 260,
   },
   {
     id: "g3p",
-    labelKey: "map.nodes.g3p.label",
-    tooltipKey: "map.nodes.g3p.tooltip",
-    descriptionKey: "map.nodes.g3p.description",
-    locationKey: "map.nodes.g3p.location",
+    name: {
+      en: "G3P",
+      zh: TERMS.G3P,
+    },
+    tooltip: {
+      en: "Triose phosphate in payoff phase.",
+      zh: "收益阶段的三碳糖磷酸。",
+    },
+    description: {
+      en: "Glyceraldehyde-3-phosphate drives ATP yield.",
+      zh: `${TERMS.G3P}推动${TERMS.ATP}生成。`,
+    },
+    location: {
+      en: "Cytosol",
+      zh: TERMS.Cytosol,
+    },
     key: false,
-    detailsKeys: [
-      "map.nodes.g3p.details.0",
-      "map.nodes.g3p.details.1",
-    ],
+    bullets: {
+      en: [
+        "Oxidized to generate NADH.",
+        "Converts to pyruvate downstream.",
+      ],
+      zh: [
+        `被氧化生成${TERMS.NADH}。`,
+        `下游转化为${TERMS.Pyruvate}。`,
+      ],
+    },
     x: 520,
     y: 320,
   },
   {
     id: "pyruvate",
-    labelKey: "map.nodes.pyruvate.label",
-    tooltipKey: "map.nodes.pyruvate.tooltip",
-    descriptionKey: "map.nodes.pyruvate.description",
-    locationKey: "map.nodes.pyruvate.location",
+    name: {
+      en: "Pyruvate",
+      zh: TERMS.Pyruvate,
+    },
+    tooltip: {
+      en: "End product of glycolysis.",
+      zh: `${TERMS.Glycolysis}的终产物。`,
+    },
+    description: {
+      en: "Pyruvate connects glycolysis to mitochondrial entry.",
+      zh: `${TERMS.Pyruvate}连接${TERMS.Glycolysis}与${TERMS.Mitochondria}进入。`,
+    },
+    location: {
+      en: "Cytosol → Mitochondria",
+      zh: `${TERMS.Cytosol} → ${TERMS.Mitochondria}`,
+    },
     key: true,
-    detailsKeys: [
-      "map.nodes.pyruvate.details.0",
-      "map.nodes.pyruvate.details.1",
-    ],
+    bullets: {
+      en: [
+        "Converted to acetyl-CoA via pyruvate dehydrogenase.",
+        "Supports fermentation in anaerobic states.",
+      ],
+      zh: [
+        `经丙酮酸脱氢酶转化为${TERMS.AcetylCoA}。`,
+        "在无氧状态下支持发酵。",
+      ],
+    },
     x: 420,
     y: 360,
   },
   {
     id: "acetyl-coa",
-    labelKey: "map.nodes.acetylCoa.label",
-    tooltipKey: "map.nodes.acetylCoa.tooltip",
-    descriptionKey: "map.nodes.acetylCoa.description",
-    locationKey: "map.nodes.acetylCoa.location",
+    name: {
+      en: "Acetyl-CoA",
+      zh: TERMS.AcetylCoA,
+    },
+    tooltip: {
+      en: "Mitochondrial carbon entry.",
+      zh: `进入${TERMS.Mitochondria}的碳源入口。`,
+    },
+    description: {
+      en: "Acetyl-CoA fuels the TCA cycle and lipid synthesis.",
+      zh: `${TERMS.AcetylCoA}为${TERMS.TCA}与脂质合成供能。`,
+    },
+    location: {
+      en: "Mitochondria",
+      zh: TERMS.Mitochondria,
+    },
     key: true,
-    detailsKeys: [
-      "map.nodes.acetylCoa.details.0",
-      "map.nodes.acetylCoa.details.1",
-    ],
+    bullets: {
+      en: [
+        "Generated by pyruvate dehydrogenase complex.",
+        "Feeds citrate synthase to start TCA cycle.",
+      ],
+      zh: [
+        "由丙酮酸脱氢酶复合体生成。",
+        `进入柠檬酸合成酶启动${TERMS.TCA}。`,
+      ],
+    },
     x: 360,
     y: 420,
   },
   {
     id: "citrate",
-    labelKey: "map.nodes.citrate.label",
-    tooltipKey: "map.nodes.citrate.tooltip",
-    descriptionKey: "map.nodes.citrate.description",
-    locationKey: "map.nodes.citrate.location",
+    name: {
+      en: "Citrate",
+      zh: TERMS.Citrate,
+    },
+    tooltip: {
+      en: "First TCA cycle intermediate.",
+      zh: `${TERMS.TCA}的第一个中间体。`,
+    },
+    description: {
+      en: "Citrate signals energy abundance to the cytosol.",
+      zh: `${TERMS.Citrate}向${TERMS.Cytosol}传递能量充足信号。`,
+    },
+    location: {
+      en: "Mitochondria",
+      zh: TERMS.Mitochondria,
+    },
     key: false,
-    detailsKeys: [
-      "map.nodes.citrate.details.0",
-      "map.nodes.citrate.details.1",
-    ],
+    bullets: {
+      en: [
+        "Exits mitochondria for lipid synthesis.",
+        "Allosterically inhibits phosphofructokinase.",
+      ],
+      zh: [
+        `输出${TERMS.Mitochondria}用于脂质合成。`,
+        "变构抑制磷酸果糖激酶。",
+      ],
+    },
     x: 640,
     y: 360,
   },
   {
     id: "atp",
-    labelKey: "map.nodes.atp.label",
-    tooltipKey: "map.nodes.atp.tooltip",
-    descriptionKey: "map.nodes.atp.description",
-    locationKey: "map.nodes.atp.location",
+    name: {
+      en: "ATP",
+      zh: TERMS.ATP,
+    },
+    tooltip: {
+      en: "Immediate energy currency.",
+      zh: "即时能量货币。",
+    },
+    description: {
+      en: "ATP levels inform pathway throttling.",
+      zh: `${TERMS.ATP}水平决定通路节流。`,
+    },
+    location: {
+      en: "Cell-wide",
+      zh: "全细胞范围（Cell-wide）",
+    },
     key: false,
-    detailsKeys: [
-      "map.nodes.atp.details.0",
-      "map.nodes.atp.details.1",
-    ],
+    bullets: {
+      en: [
+        "Produced in glycolysis and oxidative phosphorylation.",
+        "Inhibits early glycolysis when abundant.",
+      ],
+      zh: [
+        `在${TERMS.Glycolysis}与氧化磷酸化（Oxidative phosphorylation）中生成。`,
+        `充足时抑制早期${TERMS.Glycolysis}。`,
+      ],
+    },
     x: 700,
     y: 220,
   },
   {
     id: "nadh",
-    labelKey: "map.nodes.nadh.label",
-    tooltipKey: "map.nodes.nadh.tooltip",
-    descriptionKey: "map.nodes.nadh.description",
-    locationKey: "map.nodes.nadh.location",
+    name: {
+      en: "NADH",
+      zh: TERMS.NADH,
+    },
+    tooltip: {
+      en: "Reducing power for ATP synthesis.",
+      zh: `合成${TERMS.ATP}所需的还原力。`,
+    },
+    description: {
+      en: "NADH shuttles electrons to the respiratory chain.",
+      zh: `${TERMS.NADH}将电子传递至呼吸链（Respiratory chain）。`,
+    },
+    location: {
+      en: "Mitochondria",
+      zh: TERMS.Mitochondria,
+    },
     key: false,
-    detailsKeys: [
-      "map.nodes.nadh.details.0",
-      "map.nodes.nadh.details.1",
-    ],
+    bullets: {
+      en: [
+        "Generated in glycolysis and TCA cycle.",
+        "Donates electrons to produce ATP.",
+      ],
+      zh: [
+        `在${TERMS.Glycolysis}与${TERMS.TCA}中产生。`,
+        `提供电子以生成${TERMS.ATP}。`,
+      ],
+    },
     x: 780,
     y: 260,
   },
