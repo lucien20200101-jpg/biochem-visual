@@ -1,9 +1,11 @@
 import { useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import SvgMapViewer from "../components/SvgMapViewer";
 import mapSvg from "../assets/maps/mini-metabolism.svg";
-import { mapMeta, mapNodes } from "../data/mapData";
+import { mapNodes } from "../data/mapData";
 
 export default function MapView() {
+  const { t } = useTranslation();
   const [selectedNode, setSelectedNode] = useState(mapNodes[0]);
   const details = useMemo(
     () => selectedNode?.details ?? [],
@@ -13,8 +15,8 @@ export default function MapView() {
   return (
     <section className="map-page">
       <header className="map-page-header">
-        <h2>{mapMeta.title}</h2>
-        <p>{mapMeta.subtitle}</p>
+        <h2>{t("map.title")}</h2>
+        <p>{t("map.subtitle")}</p>
       </header>
       <div className="map-page-grid">
         <SvgMapViewer
@@ -24,21 +26,23 @@ export default function MapView() {
         />
         <aside className="map-info-panel" aria-live="polite">
           <div className="map-info-card">
-            <p className="map-info-label">Selected node</p>
+            <p className="map-info-label">{t("map.selectedNode")}</p>
             <h3>{selectedNode.label}</h3>
             <p className="map-info-summary">{selectedNode.description}</p>
             <div className="map-info-meta">
               <div>
-                <span className="map-info-title">Location</span>
+                <span className="map-info-title">{t("map.location")}</span>
                 <span>{selectedNode.location}</span>
               </div>
               <div>
-                <span className="map-info-title">Status</span>
-                <span>{selectedNode.key ? "Key checkpoint" : "Standard node"}</span>
+                <span className="map-info-title">{t("map.status")}</span>
+                <span>
+                  {selectedNode.key ? t("map.keyCheckpoint") : t("map.standardNode")}
+                </span>
               </div>
             </div>
             <div className="map-info-list">
-              <p className="map-info-title">Highlights</p>
+              <p className="map-info-title">{t("map.highlights")}</p>
               <ul>
                 {details.map((item) => (
                   <li key={item}>{item}</li>
@@ -46,15 +50,12 @@ export default function MapView() {
               </ul>
             </div>
             <button type="button" className="map-info-action">
-              Open reaction timeline
+              {t("map.openReactionTimeline")}
             </button>
           </div>
           <div className="map-info-card is-muted">
-            <p className="map-info-title">Next steps</p>
-            <p>
-              Swap in the full pathway SVG and hydrate these panels with real
-              metabolite metadata.
-            </p>
+            <p className="map-info-title">{t("map.nextStepsTitle")}</p>
+            <p>{t("map.nextStepsDescription")}</p>
           </div>
         </aside>
       </div>

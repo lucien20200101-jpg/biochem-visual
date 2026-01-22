@@ -1,8 +1,10 @@
 import { useMemo, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
 
 export default function SvgMapViewer({ mapUrl, nodes, onSelect }) {
+  const { t } = useTranslation();
   const containerRef = useRef(null);
   const [hoveredNodeId, setHoveredNodeId] = useState(null);
   const [transform, setTransform] = useState({ x: 40, y: 20, scale: 1 });
@@ -64,19 +66,16 @@ export default function SvgMapViewer({ mapUrl, nodes, onSelect }) {
     <div className="svg-map-shell">
       <div className="svg-map-header">
         <div>
-          <p className="svg-map-eyebrow">Global Metabolism</p>
-          <h3>Interactive Map Canvas</h3>
-          <p>
-            Drag to pan, scroll to zoom, and select nodes to open details on the
-            right.
-          </p>
+          <p className="svg-map-eyebrow">{t("map.canvasEyebrow")}</p>
+          <h3>{t("map.canvasTitle")}</h3>
+          <p>{t("map.canvasDescription")}</p>
         </div>
         <div className="svg-map-controls">
           <button
             type="button"
             onClick={() => setTransform({ x: 40, y: 20, scale: 1 })}
           >
-            Reset view
+            {t("map.resetView")}
           </button>
           <span>{Math.round(transform.scale * 100)}%</span>
         </div>
@@ -94,7 +93,7 @@ export default function SvgMapViewer({ mapUrl, nodes, onSelect }) {
           viewBox="0 0 900 520"
           width="100%"
           height="100%"
-          aria-label="Mini metabolism map"
+          aria-label={t("map.canvasAriaLabel")}
           role="img"
         >
           <g transform={`translate(${transform.x} ${transform.y}) scale(${transform.scale})`}>

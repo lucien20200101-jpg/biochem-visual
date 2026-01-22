@@ -140,8 +140,3 @@ export const mapNodes = [
     y: 260,
   },
 ];
-
-export const mapMeta = {
-  title: "Mini Metabolism Map",
-  subtitle: "Minimal interactive scaffold for the manuscript pathway view.",
-};
