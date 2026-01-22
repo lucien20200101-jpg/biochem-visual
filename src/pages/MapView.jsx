@@ -51,11 +51,14 @@ export default function MapView() {
         <SvgMapViewer
           mapUrl={mapSvg}
           nodes={mapNodes}
+          onSelect={(node) => setSelectedNodeId(node.id)}
+          nodes={mapNodes}
           onNodeClick={(node) => setSelectedNodeId(node.id)}
         />
         <aside className="map-info-panel" aria-live="polite">
           <div className="map-info-card">
             <p className="map-info-label">{t("map.selectedNode")}</p>
+            <h3>{selectedNode.name}</h3>
             <h3>{selectedNode.name}</h3>
             <p className="map-info-summary">{selectedNode.description}</p>
             <div className="map-info-meta">

@@ -134,6 +134,17 @@ export default function SvgMapViewer({ mapUrl, nodes, onNodeClick }) {
                       node.name?.[lang] ??
                       node.name?.en}
                   </text>
+                  <text
+                    className="map-node-label"
+                    x={node.x}
+                    y={node.y + 4}
+                    textAnchor="middle"
+                  >
+                    {node.label?.[lang] ??
+                      node.label?.en ??
+                      node.name?.[lang] ??
+                      node.name?.en}
+                  </text>
                 </g>
               ))}
               {hoveredNode ? (
@@ -146,7 +157,11 @@ export default function SvgMapViewer({ mapUrl, nodes, onNodeClick }) {
                     <tspan className="map-tooltip-title">
                       {getLocalizedField(hoveredNode.name)}
                     </tspan>
+                    <tspan className="map-tooltip-title">
+                      {getLocalizedField(hoveredNode.name)}
+                    </tspan>
                     <tspan x="12" y="40" className="map-tooltip-body">
+                      {getLocalizedField(hoveredNode.tooltip)}
                       {getLocalizedField(hoveredNode.tooltip)}
                     </tspan>
                   </text>
